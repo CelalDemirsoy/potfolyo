@@ -1,0 +1,13 @@
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Build output
+dist
+.vercel
+
+# Local env files
+.env
+.env.local
