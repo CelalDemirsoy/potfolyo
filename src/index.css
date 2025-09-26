@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Full-bleed layout: body ve html tüm yüksekliği kaplasın */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* code-rain canvas/div tüm ekranı kaplasın */
+#codeRain {
+  display: block;
+  width: 100vw;   /* tam ekran genişlik */
+  height: 100vh;  /* tam ekran yükseklik */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;    /* içerik üstünde durmasın */
+  pointer-events: none; /* tıklamayı engelle */
+}
+
+/* arka planın fade katmanı (üst üste binmeyi yumuşatır) */
+.code-rain-fade {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* opsiyonel: mobilde font boyutunu küçült */
+@media (max-width: 640px) {
+  :root { --codeFontSize: 12px; }
+}
+
+
+
+/* Code-lines background 
+.code-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+  white-space: pre;
+  font-size: 20px;
+  line-height: 1.6;
+  padding: 40px;
+}
+
+/* ensure content appears above the background 
+.app-shell { position: relative; z-index: 10; }
+
+ small helper for rating blocks */
+.rating-block {
+  width: 15px;
+  height: 25px;
+  border-radius: 40px;
+}

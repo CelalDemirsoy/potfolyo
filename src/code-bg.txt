@@ -1,0 +1,45 @@
+
+
+// ==================== UTILITY FUNCTIONS ====================
+function generateRandomId() { return Math.random().toString(36).substr(2, 9) + Date.now().toString(36); }
+function formatCurrency(amount, currency = 'USD') { return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(amount); }
+function debounce(func, wait) { let timeout; return function executedFunction(...args) { const later = () => { clearTimeout(timeout); func(...args); }; clearTimeout(timeout); timeout = setTimeout(later, wait); }; }
+function throttle(func, limit) { let inThrottle; return function(...args) { if (!inThrottle) { func.apply(this, args); inThrottle = true; setTimeout(() => inThrottle = false, limit); } }; }
+
+// ==================== API SERVICE ====================
+class ApiService {
+  constructor(baseURL) { this.baseURL = baseURL; this.defaultHeaders = { 'Content-Type': 'application/json' }; }
+  async get(endpoint) { const response = await fetch(`${this.baseURL}${endpoint}`); return this.handleResponse(response); }
+  async post(endpoint, data) { const response = await fetch(`${this.baseURL}${endpoint}`, { method: 'POST', headers: this.defaultHeaders, body: JSON.stringify(data) }); return this.handleResponse(response); }
+  async put(endpoint, data) { const response = await fetch(`${this.baseURL}${endpoint}`, { method: 'PUT', headers: this.defaultHeaders, body: JSON.stringify(data) }); return this.handleResponse(response); }
+  async delete(endpoint) { const response = await fetch(`${this.baseURL}${endpoint}`, { method: 'DELETE' }); return this.handleResponse(response); }
+  async handleResponse(response) { if (!response.ok) { throw new Error(`HTTP error! status: ${response.status}`); } return await response.json(); }
+}
+
+// ==================== DATA VALIDATION ====================
+const Validators = {
+  isEmail: (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
+  isPhone: (phone) => /^\+?[\d\s-()]{10,}$/.test(phone),
+  isStrongPassword: (password) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password),
+  isURL: (url) => { try { new URL(url); return true; } catch { return false; } },
+  isDate: (date) => !isNaN(Date.parse(date)),
+  isNumber: (num) => !isNaN(parseFloat(num)) && isFinite(num)
+};
+
+// ==================== LOCAL STORAGE MANAGER ====================
+const Storage = {
+  set: (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch (e) { console.error('Storage set error:', e); return false; } },
+  get: (key) => { try { const item = localStorage.getItem(key); return item ? JSON.parse(item) : null; } catch (e) { console.error('Storage get error:', e); return null; } },
+  remove: (key) => { try { localStorage.removeItem(key); return true; } catch (e) { console.error('Storage remove error:', e); return false; } },
+  clear: () => { try { localStorage.clear(); return true; } catch (e) { console.error('Storage clear error:', e); return false; } }
+};
+
+// ==================== DOM MANIPULATION HELPERS ====================
+const DOM = {
+  create: (tag, attributes = {}, children = []) => { const element = document.createElement(tag); Object.keys(attributes).forEach(attr => element[attr] = attributes[attr]); children.forEach(child => element.appendChild(typeof child === 'string' ? document.createTextNode(child) : child)); return element; },
+  show: (selector) => { const el = document.querySelector(selector); if (el) el.style.display = 'block'; },
+  hide: (selector) => { const el = document.querySelector(selector); if (el) el.style.display = 'none'; },
+  toggle: (selector) => { const el = document.querySelector(selector); if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none'; },
+  on: (selector, event, handler) => { document.querySelector(selector)?.addEventListener(event, handler); },
+  off: (selector, event, handler) => { document.querySelector(selector)?.removeEventListener(event, handler); }
+};
