@@ -3,7 +3,7 @@ import { FaSun, FaMoon, FaPhone, FaEnvelope, FaGithub, FaLinkedin } from "react-
 import SkillRating from "./components/SkillRating";
 import { LOCALES } from "./locales";
 
-export default function App(){
+export default function App() {
   const [dark, setDark] = useState(true);
   const [lang, setLang] = useState("en");
 
@@ -15,6 +15,15 @@ export default function App(){
 
   const t = LOCALES[lang];
 
+  // Yardımcı fonksiyon: Skills listesini ikiye böler
+  const splitSkills = (list) => {
+    const mid = Math.ceil(list.length / 2);
+    return [list.slice(0, mid), list.slice(mid)];
+  };
+
+  const [hardSkillsCol1, hardSkillsCol2] = splitSkills(t.hardSkillsList);
+  const [softSkillsCol1, softSkillsCol2] = splitSkills(t.softSkillsList);
+
   return (
     <div className="app-shell">
       {/* code background */}
@@ -24,6 +33,7 @@ export default function App(){
       {/* HEADER */}
       <header className="fixed left-0 right-0 top-0 z-50 bg-gray-900 text-white backdrop-blur border-b border-black">
         <div className="max-w-6xl mx-auto flex items-center justify-between p-4 gap-4">
+          {/* Navigation */}
           <div className="flex items-center gap-6">
             <a href="#about" className="px-2 py-1 rounded hover:bg-gray-700">{t.nav.about}</a>
             <a href="#skills" className="px-2 py-1 rounded hover:bg-gray-700">{t.nav.skills}</a>
@@ -32,33 +42,44 @@ export default function App(){
             <a href="#contact" className="px-2 py-1 rounded hover:bg-gray-700">{t.nav.contact}</a>
           </div>
 
+          {/* Language & Theme toggles */}
           <div className="flex items-center gap-3">
-            {/* language toggle */}
+            {/* Language toggle */}
             <div className="flex items-center gap-1 bg-black p-1 rounded-full border border-gray-600">
-              <button onClick={() => setLang("tr")} className={`px-3 py-1 rounded-full ${lang==="tr" ? "bg-accent text-white" : "text-white"}`}>TR</button>
-              <button onClick={() => setLang("en")} className={`px-3 py-1 rounded-full ${lang==="en" ? "bg-accent text-white" : "text-white"}`}>EN</button>
+              <button
+                onClick={() => setLang("tr")}
+                className={`px-3 py-1 rounded-full ${lang === "tr" ? "bg-purple-600 text-white" : "text-white"}`}
+              >
+                TR
+              </button>
+              <button
+                onClick={() => setLang("en")}
+                className={`px-3 py-1 rounded-full ${lang === "en" ? "bg-purple-600 text-white" : "text-white"}`}
+              >
+                EN
+              </button>
             </div>
-
-            {/* dark toggle */}
-            <button onClick={() => setDark(d => !d)} className="relative inline-flex h-8 w-16 items-center rounded-full bg-gray-700 p-1">
-              <span className={`h-6 w-6 rounded-full bg-white dark:bg-black flex items-center justify-center transform ${dark ? "translate-x-8" : "translate-x-0"} transition`}>
-                {dark ? <FaMoon/> : <FaSun/>}
-              </span>
-            </button>
+            
+            {/* Tema Butonları yoruma alınmış */}
+            {/* <button onClick={() => setDark(false)} className={`p-2 rounded-full hover:bg-purple-600 transition ${!dark ? "bg-purple-600 text-white" : "text-white"}`}> <FaSun className="w-4 h-4" /> </button>
+            <button onClick={() => setDark(true)} className={`p-2 rounded-full hover:bg-purple-600 transition ${dark ? "bg-purple-600 text-white" : "text-white"}`}> <FaMoon className="w-4 h-4" /> </button> */}
+            
           </div>
         </div>
       </header>
 
+      {/* MAIN */}
       <main className="max-w-6xl mx-auto px-6 pt-28 pb-16 text-white">
         {/* ABOUT */}
         <section id="about" className="mb-12">
           <div className="flex flex-col md:flex-row items-center gap-8 bg-gray-900 rounded-xl p-6 shadow">
-            <img src="Profil_3.jpeg" alt="profile" className="w-36 h-36 object-cover ring-4 ring-white"/>
+            <img src="Profil_3.jpeg" alt="profile" className="w-60 h-60 object-cover ring-4 ring-white"/>
             <div>
               <h1 className="text-3xl font-bold">Celal Demirsoy</h1>
-              <p className="mt-3 max-w-xl">{t.aboutText}</p>
+              {/* max-w-xl kaldırıldı, max-w-full yapıldı */}
+              <p className="mt-4 max-w-full">{t.aboutText}</p> 
               <div className="mt-4 flex gap-3 text-xl">
-                <a href="mailto:celal.dmrsy@gmailcom" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700"><FaEnvelope/></a>
+                <a href="mailto:celal.dmrsy@gmail.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700"><FaEnvelope/></a>
                 <a href="https://github.com/CelalDemirsoy" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700"><FaGithub/></a>
                 <a href="https://www.linkedin.com/in/celal-demirsoy/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700"><FaLinkedin/></a>
               </div>
@@ -66,135 +87,105 @@ export default function App(){
           </div>
         </section>
 
-         {/* SOFT SKILLS */}
+
+        {/* SKILLS - Teknik Yetenekler (HARD SKILLS) */}
         <section id="skills" className="mb-12">
           <div className="bg-gray-900 p-6 rounded-xl shadow">
             <h2 className="text-2xl font-semibold mb-4">{t.skillsTitle}</h2>
             <div className="grid md:grid-cols-2 gap-6">
+
+              {/* Hard Skills Kolon 1 */}
               <div>
-                <h3 className="font-semibold">Frontend</h3>
                 <div className="mt-4 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">JavaScript</div>
-                      <div className="text-sm text-gray-300">ES6+, DOM, Fetch</div>
+                  {hardSkillsCol1.map((skill, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium">{skill.title}</div>
+                        {/* Details alanı varsa göster */}
+                        {skill.details && <div className="text-sm text-gray-300">{skill.details}</div>}
+                      </div>
+                      <SkillRating level={skill.level} />
                     </div>
-                    <SkillRating level={5} />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">React</div>
-                      <div className="text-sm text-gray-300">Hooks, Context, Router</div>
-                    </div>
-                    <SkillRating level={4} />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">TailwindCSS</div>
-                      <div className="text-sm text-gray-300">Utility-first styling</div>
-                    </div>
-                    <SkillRating level={4} />
-                  </div>
+                  ))}
                 </div>
               </div>
 
+              {/* Hard Skills Kolon 2 */}
               <div>
-                <h3 className="font-semibold">Other</h3>
                 <div className="mt-4 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">Node.js</div>
-                      <div className="text-sm text-gray-300">APIs & tooling</div>
+                  {hardSkillsCol2.map((skill, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium">{skill.title}</div>
+                        {skill.details && <div className="text-sm text-gray-300">{skill.details}</div>}
+                      </div>
+                      <SkillRating level={skill.level} />
                     </div>
-                    <SkillRating level={3} />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">TypeScript</div>
-                      <div className="text-sm text-gray-300">Types & tooling</div>
-                    </div>
-                    <SkillRating level={3} />
-                  </div>
+                  ))}
                 </div>
               </div>
+
             </div>
           </div>
         </section>
 
- {/* SOFT SKILLS */}
-        <section id="skills" className="mb-12">
+        {/* SKILLS - Kişisel Yetenekler (SOFT SKILLS) */}
+        <section id="soft-skills" className="mb-12">
           <div className="bg-gray-900 p-6 rounded-xl shadow">
-            <h2 className="text-2xl font-semibold mb-4">{t.skillsTitle}</h2>
+            <h2 className="text-2xl font-semibold mb-4">{t.skillsTitle2}</h2>
             <div className="grid md:grid-cols-2 gap-6">
+
+              {/* Soft Skills Kolon 1 */}
               <div>
-                <h3 className="font-semibold">Frontend</h3>
                 <div className="mt-4 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">JavaScript</div>
-                      <div className="text-sm text-gray-300">ES6+, DOM, Fetch</div>
+                  {softSkillsCol1.map((skill, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium">{skill.title}</div>
+                      </div>
+                      <SkillRating level={skill.level} />
                     </div>
-                    <SkillRating level={5} />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">React</div>
-                      <div className="text-sm text-gray-300">Hooks, Context, Router</div>
-                    </div>
-                    <SkillRating level={4} />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">TailwindCSS</div>
-                      <div className="text-sm text-gray-300">Utility-first styling</div>
-                    </div>
-                    <SkillRating level={4} />
-                  </div>
+                  ))}
                 </div>
               </div>
 
+              {/* Soft Skills Kolon 2 */}
               <div>
-                <h3 className="font-semibold">Other</h3>
                 <div className="mt-4 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">Node.js</div>
-                      <div className="text-sm text-gray-300">APIs & tooling</div>
+                  {softSkillsCol2.map((skill, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <div>
+                        <div className="font-medium">{skill.title}</div>
+                      </div>
+                      <SkillRating level={skill.level} />
                     </div>
-                    <SkillRating level={3} />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">TypeScript</div>
-                      <div className="text-sm text-gray-300">Types & tooling</div>
-                    </div>
-                    <SkillRating level={3} />
-                  </div>
+                  ))}
                 </div>
               </div>
+
             </div>
           </div>
         </section>
 
-
-        
         {/* PROJECTS */}
         <section id="projects" className="mb-12">
           <div className="bg-gray-900 p-6 rounded-xl shadow">
             <h2 className="text-2xl font-semibold mb-4">{t.projectsTitle}</h2>
             <div className="grid md:grid-cols-3 gap-6">
               <article className="p-4 bg-gray-800 rounded-xl shadow">
-                <h4 className="font-semibold">Project One</h4>
-                <p className="text-sm mt-2">React app with nice UI.</p>
-                <div className="mt-3"><a href="#" className="text-sm underline">Repository</a></div>
+                <h4 className="font-semibold">{t.projects.ecommerce.title}</h4>
+                <p className="text-sm mt-2">{t.projects.ecommerce.desc}</p>
+                <div className="mt-3"><a href="https://www.glories.online" target="_blank" rel="noopener noreferrer" className="text-sm underline">{t.projects.ecommerce.visit}</a></div>
               </article>
               <article className="p-4 bg-gray-800 rounded-xl shadow">
-                <h4 className="font-semibold">Project Two</h4>
-                <p className="text-sm mt-2">API + frontend.</p>
+                <h4 className="font-semibold">{t.projects.movie.title}</h4>
+                <p className="text-sm mt-2">{t.projects.movie.desc}</p>
+                <div className="mt-3"><a href="https://github.com/CelalDemirsoy/Movie-App" target="_blank" rel="noopener noreferrer" className="text-sm underline">{t.projects.movie.visit}</a></div>
               </article>
               <article className="p-4 bg-gray-800 rounded-xl shadow">
-                <h4 className="font-semibold">Project Three</h4>
-                <p className="text-sm mt-2">Full-stack project.</p>
+                <h4 className="font-semibold">{t.projects.aiWardrobe.title}</h4>
+                <p className="text-sm mt-2">{t.projects.aiWardrobe.desc}</p>
+                <div className="mt-3"><a href="tübitak.html" target="_blank" rel="noopener noreferrer" className="text-sm underline">{t.projects.aiWardrobe.visit}</a></div>
               </article>
             </div>
           </div>
@@ -204,9 +195,7 @@ export default function App(){
         <section id="experience" className="mb-12">
           <div className="bg-gray-900 p-6 rounded-xl shadow">
             <h2 className="text-2xl font-semibold mb-4">{t.experienceTitle}</h2>
-            <strong>Intern — Company</strong>
-            <div className="text-sm text-gray-300">Jun 2024 - Present</div>
-            <p className="mt-2">Worked on UI components, performance and accessibility.</p>
+            <strong>{t.experience}</strong>
           </div>
         </section>
 
@@ -215,14 +204,10 @@ export default function App(){
           <div className="bg-gray-900 p-6 rounded-xl shadow">
             <h2 className="text-xl font-semibold mb-4">{t.certificatesTitle}</h2>
             <ul className="list-disc pl-5">
-              <li>Frontend Developer  </li>
-              <li>React Specialist </li>
-               <li>Full Stack Developer </li>
-               <li>Node.js Developer </li>
-               <li>TypeScript Developer </li>
-               <li>GraphQL Developer </li>
-               <li>React Native Developer </li>
-                <li>JavaScript Developer </li>
+              {/* Lokalizasyondaki dizi üzerinden haritalama yapıldı */}
+              {t.certificatesList.map((cert, index) => (
+                <li key={index}>{cert}</li>
+              ))}
             </ul>
           </div>
         </section>
@@ -233,14 +218,11 @@ export default function App(){
             <h2 className="text-xl font-semibold mb-4">{t.contactTitle}</h2>
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1">
-                <p className="font-medium">{t.phone}</p>
-                <p className="mt-1">+90 506 024 22 72</p>
                 <p className="font-medium mt-4">{t.email}</p>
                 <p className="mt-1">celal.dmrsy@gmail.com</p>
               </div>
 
               <div className="w-48 flex flex-col gap-3">
-                <a href="tel:+905060242272" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700"><FaPhone/> <span>Call</span></a>
                 <a href="mailto:celal.dmrsy@gmail.com" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700"><FaEnvelope/> <span>Email</span></a>
                 <a href="https://github.com/CelalDemirsoy" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700"><FaGithub/> <span>GitHub</span></a>
                 <a href="https://www.linkedin.com/in/celal-demirsoy/" className="flex items-center gap-3 p-2 rounded hover:bg-gray-700"><FaLinkedin/> <span>LinkedIn</span></a>
@@ -249,10 +231,11 @@ export default function App(){
           </div>
         </section>
 
+        {/* FOOTER */}
         <footer className="text-center text-sm text-gray-400 mt-8">
           © {new Date().getFullYear()} Celal Demirsoy {t.footerText}
         </footer>
       </main>
     </div>
-  )
+  );
 }
