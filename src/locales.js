@@ -13,7 +13,7 @@ export const LOCALES = {
 
     aboutTitle: "About Me",
     aboutText:
-      "Hello, I'm Celal. I am a Computer Engineering student at Istanbul Esenyurt University. My interest in technology began at a young age, and today I focus particularly on artificial intelligence, software development, data science, and web technologies. I am currently improving my skills in languages such as Python, C++, Java, and SQL, while also gaining practical experience through web development and machine learning projects. I enjoy researching and learning new things; I often lose track of time while working on projects. My career goal is to transfer the knowledge I acquire during my university education into real-world applications and create value both academically and professionally. I aim to contribute especially to AI-powered solutions and data-oriented projects. I see myself as someone who is open to continuous learning and improvement, enjoys producing, and works well in teams. I am always open to new projects, internships, and international collaborations.",
+      "A results-driven AI Engineer Candidate specializing in Deep Learning, Computer Vision, and Data Analytics. My core focus is translating theoretical AI models into direct commercial impact and scalable systems.I have a proven track record, evidenced by my TÜBİTAK-Supported research project (Digital Wardrobe Simulation). In this work, I utilized advanced Computer Vision techniques like Mask R-CNN and GAN/VTON to develop a prototype aimed at reducing outfit selection time by 40% and increasing user satisfaction by 25%.Core Proficiencies: I leverage Python (ML/DL), C++, Java, and SQL for complex algorithm development and robust large-scale data management. My career vision is firmly set on applying MLOps principles to drive data science and predictive analytics solutions in high-impact industries.Actively seeking advanced internships and international collaborations that require demonstrated technical depth and a commitment to delivering tangible business outcomes.",
 
     skillsTitle: "Hard Skills",
     skillsTitle2: "Soft Skills",
@@ -28,12 +28,12 @@ export const LOCALES = {
       {
         title: "Cloud Infrastructure",
         details: "Docker, Kubernetes, AWS, Azure",
-        level: 3
+        level: 2
       },
       {
         title: "Databases",
         details: "MySQL, PostgreSQL, MSSQL",
-        level: 4
+        level: 3
       },
       {
         title: "Mobile Development",
@@ -53,12 +53,12 @@ export const LOCALES = {
       {
         title: "Data and Artificial Intelligence",
         details: "Pandas, NumPy, Matplotlib, Scikit-learn, TensorFlow",
-        level: 3
+        level: 4
       },
       {
         title: "Version Control and Testing",
         details: "Git, GitHub, GitLab, JUnit, Selenium",
-        level: 3
+        level: 5
       }
     ],
 
@@ -153,7 +153,7 @@ export const LOCALES = {
 
     aboutTitle: "Hakkımda",
     aboutText:
-      "Merhaba, ben Celal. İstanbul Esenyurt Üniversitesi Bilgisayar Mühendisliği öğrencisiyim. Teknolojiye olan ilgim küçük yaşlarda başladı ve bugün özellikle yapay zeka, yazılım geliştirme, veri bilimi ve web teknolojileri üzerine yoğunlaşıyorum. Şu anda Python, C++, Java ve SQL gibi dillerde kendimi geliştiriyor, aynı zamanda web geliştirme ve makine öğrenmesi projeleriyle pratik deneyim kazanıyorum. Araştırma yapmayı ve yeni şeyler öğrenmeyi çok seviyorum; çoğu zaman proje üzerinde çalışırken saatlerin nasıl geçtiğini fark etmiyorum. Kariyer hedefim, üniversite eğitimimde edindiğim bilgileri gerçek hayata aktararak hem akademik hem de profesyonel anlamda değer üretmek. Özellikle yapay zeka destekli çözümler ve veri odaklı projelerde katkı sağlamayı amaçlıyorum. Kendimi sürekli öğrenmeye ve gelişmeye açık, takım çalışmasına yatkın ve üretmeyi seven biri olarak görüyorum. Yeni projelere, stajlara ve uluslararası işbirliklerine katılmaya her zaman açığım.",
+      "Derin öğrenme, Bilgisayarlı Görü ve Veri Analizi alanlarında uzmanlaşan, sonuç odaklı Yapay Zeka Mühendisi Adayıyım. Çalışmalarım, teorik AI modellerini doğrudan ticari etkiye dönüştürmeye odaklıdır.TÜBİTAK Destekli projelerle kanıtlanmış bir geçmişe sahibim. Son çalışmamda (Dijital Gardırop Simülasyonu), Mask R-CNN ve GAN/VTON gibi ileri seviye Bilgisayarlı Görü tekniklerini kullanarak kombin oluşturma süresini %40 azaltma ve kullanıcı memnuniyetini %25 artırma hedefiyle çalışan bir prototip geliştirdim.Temel yetkinliklerim; Python (ML/DL), C++, Java ve büyük veri yönetimi için SQL kullanımıdır. Kariyer vizyonum, MLOps prensipleriyle, Veri Bilimi ve öngörücü analitik çözümlerini hayata geçirerek ölçeklenebilir sistemler kurmaktır. Somut iş sonuçları yaratacak, ileri düzey staj ve uluslararası işbirliklerine açığım.",
 
     skillsTitle: "Teknik Yetenekler",
     skillsTitle2: "Kişisel Yetenekler",
@@ -168,12 +168,12 @@ export const LOCALES = {
       {
         title: "Bulut Altyapısı (Cloud)",
         details: "Docker, Kubernetes, AWS, Azure",
-        level: 3
+        level: 2
       },
       {
         title: "Veritabanları",
         details: "MySQL, PostgreSQL, MSSQL",
-        level: 4
+        level: 3
       },
       {
         title: "Mobil Geliştirme",
@@ -193,12 +193,12 @@ export const LOCALES = {
       {
         title: "Veri ve Yapay Zeka",
         details: "Pandas, NumPy, Matplotlib, Scikit-learn, TensorFlow",
-        level: 3
+        level: 4
       },
       {
         title: "Versiyon Kontrol ve Test",
         details: "Git, GitHub, GitLab, JUnit, Selenium",
-        level: 3
+        level: 5
       }
     ],
 
