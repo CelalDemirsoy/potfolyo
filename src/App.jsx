@@ -73,7 +73,7 @@ export default function App() {
         {/* ABOUT */}
         <section id="about" className="mb-12">
           <div className="flex flex-col md:flex-row items-center gap-8 bg-gray-900 rounded-xl p-6 shadow">
-            <img src="Profil_3.jpeg" alt="profile" className="w-60 h-60 object-cover ring-4 ring-white"/>
+            <img src="Profil_new.jpeg" alt="profile" className="w-60 h-60 object-cover ring-4 ring-white"/>
             <div>
               <h1 className="text-3xl font-bold">Celal Demirsoy</h1>
               {/* max-w-xl kaldırıldı, max-w-full yapıldı */}
